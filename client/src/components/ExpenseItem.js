@@ -1,16 +1,28 @@
 import React from "react";
-import { TiDelete } from "react-icons/ti";
+import { TiDeleteOutline } from "react-icons/ti";
 
-function ExpenseItem({ name, cost, id }) {
+function ExpenseItem({ expense }) {
+  const [checked, setChecked] = React.useState(false);
+  const handleChange = () => {
+    setChecked(!checked);
+  };
   return (
-    <li className="list-group-item d-flex justify-content-between align-items-center">
-      {name}
-      <div>
-        <span>${cost}</span>
-        <span className="badge badge-primary badge-pill mr-3">${cost}</span>
-        <TiDelete size="1.5em"></TiDelete>
-      </div>
-    </li>
+    <ul class="list-group">
+      <li className="list-group-item align-items-left">
+        {expense.name}
+        <span class="badge badge-error">
+          $
+          {expense.amount.toLocaleString(navigator.language, {
+            minimumFractionDigits: 0,
+          })}
+        </span>
+        <label>
+          <input type="checkbox" checked={checked} onChange={handleChange} />
+          Paid
+        </label>
+        <TiDeleteOutline />
+      </li>
+    </ul>
   );
 }
 

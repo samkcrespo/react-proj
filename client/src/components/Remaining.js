@@ -1,11 +1,11 @@
 import React from "react";
 
-function Remaining() {
+const Remaining = () => {
   return (
-    <div className="alert alert-success">
-      <span>Remaining: $3,789</span>
+    <div class={`alert p-4`}>
+      <span>Remaining: ${}</span>
     </div>
   );
-}
+};
 
 export default Remaining;

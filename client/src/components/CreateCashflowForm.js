@@ -1,41 +1,8 @@
-import * as React from "react";
-import {
-  Button,
-  TextField,
-  Alert,
-  Stack,
-  Modal,
-  Grid,
-  Typography,
-} from "@mui/material";
+import React from "react";
 
-function CreateExpenseForm({ addExpense }) {
+function CreateCashflowForm() {
   const [name, setName] = React.useState("");
   const [amount, setAmount] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
-  const [errors, setErrors] = React.useState([]);
-  const [expenses, setExpenses] = React.useState([]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors([]);
-    setLoading(true);
-    fetch("/expenses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        amount,
-      }),
-    })
-      .then((res) => res.json())
-      .then((expense) => {
-        addExpense(expense);
-      });
-  };
-
   return (
     <form>
       <div class="form-floating mb-3">
@@ -74,4 +41,4 @@ function CreateExpenseForm({ addExpense }) {
   );
 }
 
-export default CreateExpenseForm;
+export default CreateCashflowForm;
