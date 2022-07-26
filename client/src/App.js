@@ -8,7 +8,6 @@ import "./index.css";
 import CreateExpenseForm from "./components/CreateExpenseForm";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import logo1 from "./6.png";
@@ -16,7 +15,7 @@ import logo2 from "./logotransparent.png";
 import NavBar from "./components/NavBar";
 import theme from "./theme";
 import UserAccount from "./components/UserAccount";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Backdrop } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
@@ -27,6 +26,10 @@ const App = () => {
   const [user, setUser] = useState(useState({ user: null }));
   const navigate = useNavigate();
   const [expenses, setExpenses] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // React.useEffect(() => {
   //   fetch("/expenses", {
@@ -157,9 +160,14 @@ const App = () => {
     return (
       <div>
         <ThemeProvider theme={appliedTheme} />
-        <CircularProgress color="primary" />
-        <p>Loading...</p>
-
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          onClick={handleClose}
+        >
+          <CircularProgress color="primary" />
+          <p>Loading...</p>
+        </Backdrop>
         <ThemeProvider />
       </div>
     );

@@ -18,6 +18,7 @@ function CreateExpenseForm({ addExpense }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Submit reached");
     setErrors([]);
     setLoading(true);
     fetch("/expenses", {
@@ -37,7 +38,7 @@ function CreateExpenseForm({ addExpense }) {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div class="form-floating mb-3">
         <div className="col-3">
           <div>Add Expense</div>

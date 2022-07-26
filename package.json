@@ -11,6 +11,9 @@
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.9.1",
     "bootstrap": "^5.2.0",
     "react-icons": "^4.4.0",
     "uuid": "^8.3.2"

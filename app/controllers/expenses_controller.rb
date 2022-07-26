@@ -10,8 +10,8 @@ before_action :find_expense, only: [:show, :update, :destroy]
   end
 
   def create
-    category = Category.find(params[:category_id])
-    expense = @category.expenses.create(expense_params)
+    # category = Category.find(params[:category_id])
+    expense = Expense.create(expense_params)
     render json: expense, status: :created
   end
 

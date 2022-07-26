@@ -11,14 +11,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo2 from "../logotransparent.png";
 // import AdbIcon from "@mui/icons-material/Adb";
 
 const NavBar = ({ user, setUser, handleLogout }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const settings = ["User Settings"];
+  let navigate = useNavigate();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -27,12 +28,16 @@ const NavBar = ({ user, setUser, handleLogout }) => {
     setAnchorElNav(null);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    navigate("/myaccount");
   };
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="primary" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters variant="dense">
           <Typography
@@ -85,64 +90,85 @@ const NavBar = ({ user, setUser, handleLogout }) => {
             {user ? (
               <>
                 <MenuItem>
-                  <h4>
-                    <NavLink to="/logout" onClick={handleLogout}>
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: "white", display: "block" }}
-                      >
-                        Logout
-                      </Button>
-                    </NavLink>
-                  </h4>
+                  <NavLink to="/logout" onClick={handleLogout}>
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      className="btn btn-navbar"
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                        fontFamily: "Roboto",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </NavLink>
                 </MenuItem>
                 <MenuItem>
-                  <h4>
-                    <NavLink to="/dashboard">
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: "white", display: "block" }}
-                      >
-                        My Budgets
-                      </Button>
-                    </NavLink>
-                  </h4>
+                  <NavLink to="/dashboard">
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      className="btn btn-navbar"
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                        fontFamily: "Roboto",
+                      }}
+                    >
+                      My Budgets
+                    </Button>
+                  </NavLink>
                 </MenuItem>
               </>
             ) : (
               <>
                 <MenuItem>
-                  <h4>
-                    <NavLink to="/signup">
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: "white", display: "block" }}
-                      >
-                        Sign Up
-                      </Button>
-                    </NavLink>
-                  </h4>
+                  <NavLink to="/signup">
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      className="btn btn-navbar"
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                        fontFamily: "Roboto",
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </NavLink>
                 </MenuItem>
                 <MenuItem>
-                  <h4>
-                    <NavLink to="/login">
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: "white", display: "block" }}
-                      >
-                        Login
-                      </Button>
-                    </NavLink>
-                  </h4>
+                  <NavLink to="/login">
+                    <Button
+                      className="btn btn-navbar"
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                        fontFamily: "Roboto",
+                      }}
+                    >
+                      Login
+                    </Button>
+                  </NavLink>
                 </MenuItem>
               </>
             )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="User">
-              <IconButton sx={{ p: 0 }}>
+            <Tooltip title="Settings">
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0, fontFamily: "Roboto" }}
+              >
                 <Avatar alt="Sam" />
+                {/* <img src={user.profilepic} alt="user" /> */}
               </IconButton>
             </Tooltip>
             <Menu
@@ -161,11 +187,11 @@ const NavBar = ({ user, setUser, handleLogout }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {/* {settings.map((setting) => (
+              {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <h6>{setting}</h6>
                 </MenuItem>
-              ))} */}
+              ))}
             </Menu>
           </Box>
         </Toolbar>

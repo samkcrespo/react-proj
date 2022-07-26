@@ -9,10 +9,10 @@ function BudgetCard({ budget, user }) {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    fetch(`/expenses/${budget.id}`)
+    fetch(`/expenses/`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
-  }, [budget.id]);
+      .then((data) => setExpenses(data));
+  }, []);
 
   function addExpense(newExpense) {
     setExpenses([...expenses, newExpense]);
@@ -45,7 +45,7 @@ function BudgetCard({ budget, user }) {
           <CreateExpenseForm addExpense={addExpense} />
         </div>
         <Divider dark />
-        <div class="col">
+        <div class="row">
           <CreateCashflowForm />
         </div>
       </div>

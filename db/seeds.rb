@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user1 = User.create!(username: 'sally', password: 'password')
+user1 = User.create!(username: 'sally', password: 'password', profilepic: "https://cdn3d.iconscout.com/3d/free/thumb/user-3814118-3187499.png")
 
 budget1 = Budget.create!(name: 'Sallys Budget', user: user1)
 

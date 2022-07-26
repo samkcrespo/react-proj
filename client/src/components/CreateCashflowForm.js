@@ -7,7 +7,7 @@ function CreateCashflowForm() {
     <form>
       <div class="form-floating mb-3">
         <div className="col-3">
-          <div>Add Expense</div>
+          <div>Add Income</div>
           <label for="floatingInput"></label>
           <input
             type="text"

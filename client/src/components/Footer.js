@@ -5,12 +5,10 @@ function Footer() {
   return (
     <div>
       <div className="footer">
-        <Typography type="h6" variant="h6" align="center" color="white">
+        <h6 type="h6" variant="h6" align="center" className="footer-text">
           Wise | Budget Manager
-        </Typography>
-        <Typography type="h6" variant="h6" align="center" color="white">
-          © 2022, Sam Crespo | Privacy Policy
-        </Typography>
+        </h6>
+        <h6 className="footer-text">© 2022, Sam Crespo | Privacy Policy</h6>
       </div>
     </div>
   );
