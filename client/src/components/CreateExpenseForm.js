@@ -27,15 +27,15 @@ function CreateExpenseForm({ addExpense }) {
       .then((data) => setCategories(data));
   }, []);
 
-  React.useEffect(() => {
-    fetch(`/expenses`)
-      .then((res) => res.json())
-      .then((data) => setExpenses(data));
-  }, []);
+  // React.useEffect(() => {
+  //   fetch(`/expenses`)
+  //     .then((res) => res.json())
+  //     .then((data) => setExpenses(data));
+  // }, []);
 
-  function addExpense(newExpense) {
-    setExpenses([...expenses, newExpense]);
-  }
+  // function addExpense(newExpense) {
+  //   setExpenses([...expenses, newExpense]);
+  // }
 
   React.useEffect(() => {
     fetch("/budgets")
