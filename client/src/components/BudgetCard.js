@@ -7,16 +7,25 @@ import { Divider } from "@mui/material";
 
 function BudgetCard({ budget, user }) {
   const [expenses, setExpenses] = useState([]);
+  const [budgetId, setBudgetId] = useState("");
+  const [expenseId, setExpenseId] = useState("");
+  const [budgets, setBudgets] = useState([]);
 
   useEffect(() => {
-    fetch(`/expenses/`)
+    fetch(`/expenses?id=${budget.id}`)
       .then((res) => res.json())
       .then((data) => setExpenses(data));
-  }, []);
+  }, [budget.id]);
 
   function addExpense(newExpense) {
     setExpenses([...expenses, newExpense]);
   }
+
+  useEffect(() => {
+    fetch("/budgets")
+      .then((r) => r.json())
+      .then(setBudgets);
+  }, []);
 
   return (
     <div>
@@ -42,7 +51,7 @@ function BudgetCard({ budget, user }) {
       </div>
       <div class="row">
         <div>
-          <CreateExpenseForm addExpense={addExpense} />
+          <CreateExpenseForm addExpense={addExpense} budget={budgets} />
         </div>
         <Divider dark />
         <div class="row">

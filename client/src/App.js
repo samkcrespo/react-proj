@@ -15,6 +15,8 @@ import logo2 from "./logotransparent.png";
 import NavBar from "./components/NavBar";
 import theme from "./theme";
 import UserAccount from "./components/UserAccount";
+import CreateCashflowForm from "./components/CreateCashflowForm";
+import CreateBudgetForm from "./components/CreateBudgetForm";
 import { CircularProgress, Backdrop } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -147,6 +149,12 @@ const App = () => {
                         budgets={budgets}
                       />
                     }
+                  />
+                  <Route path="my_budgets/new" element={<CreateBudgetForm />} />
+                  <Route path="expense/new" element={<CreateExpenseForm />} />
+                  <Route
+                    path="cashflows/new"
+                    element={<CreateCashflowForm />}
                   />
                 </Routes>
               </div>
