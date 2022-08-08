@@ -1,9 +1,14 @@
 import React from "react";
 
-const Remaining = () => {
+const Remaining = ({ budget }) => {
   return (
     <div class={`alert p-4`}>
-      <span>Remaining: ${}</span>
+      <span>
+        Remaining Balance: $
+        {budget.total_balance.toLocaleString(navigator.language, {
+          minimumFractionDigits: 0,
+        })}
+      </span>
     </div>
   );
 };

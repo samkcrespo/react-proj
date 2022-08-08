@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BudgetDashboard from "./components/BudgetDashboard";
+import BudgetContainer from "./components/BudgetContainer";
 import Remaining from "./components/Remaining";
 import ExpenseTotal from "./components/ExpenseTotal";
 import "./index.css";
@@ -142,7 +142,7 @@ const App = () => {
                   <Route
                     path="dashboard"
                     element={
-                      <BudgetDashboard
+                      <BudgetContainer
                         user={user}
                         handleCheckUser={handleCheckUser}
                         expenses={expenses}

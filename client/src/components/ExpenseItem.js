@@ -16,11 +16,12 @@ function ExpenseItem({ expense }) {
             minimumFractionDigits: 0,
           })}
         </span>
-        <label>
-          <input type="checkbox" checked={checked} onChange={handleChange} />
-          Paid
-        </label>
-        <TiDeleteOutline />
+        <span>
+          <label>
+            Paid
+            <input type="checkbox" checked={checked} onChange={handleChange} />
+          </label>
+        </span>
       </li>
     </ul>
   );

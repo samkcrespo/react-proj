@@ -1,41 +1,76 @@
 import React, { useEffect, useState } from "react";
-import BudgetCard from "./BudgetCard";
+import ExpenseItem from "./ExpenseItem";
+import CashflowItem from "./CashflowItem";
 import CreateExpenseForm from "./CreateExpenseForm";
-import ExpenseTotal from "./ExpenseTotal";
+import CreateCashflowForm from "./CreateCashflowForm";
+import { Divider } from "@mui/material";
+import Remaining from "./Remaining";
 
-function BudgetDashboard({ user, expenses }) {
+function BudgetDashboard({ budget, user }) {
+  const [expenses, setExpenses] = useState([]);
+  const [budgetId, setBudgetId] = useState("");
+  const [expenseId, setExpenseId] = useState("");
   const [budgets, setBudgets] = useState([]);
+  const [cashflows, setCashflows] = useState([]);
 
-  console.log({ user });
-  // function showBudgets() {
-  //   setBudgets(user.budgets ? user.budgets : []);
+  useEffect(() => {
+    fetch(`/expenses?id=${budget.id}`)
+      .then((res) => res.json())
+      .then((data) => setExpenses(data));
+  }, [budget.id]);
+
+  useEffect(() => {
+    fetch(`/cashflows?id=${budget.id}`)
+      .then((res) => res.json())
+      .then((data) => setCashflows(data));
+  }, [budget.id]);
+
+  function addExpense(newExpense) {
+    setExpenses([...expenses, newExpense]);
+  }
+
+  function addCashflow(newCashflow) {
+    setCashflows([...cashflows, newCashflow]);
+  }
+
+  // function addCashflow(newCashflow){
+  //   setCashflows([...cashflows, newCashflow]);
   // }
 
   useEffect(() => {
-    fetch(`/budgets?id=${user.id}`)
-      .then((res) => res.json())
+    fetch("/budgets")
+      .then((r) => r.json())
       .then(setBudgets);
-  }, [user.id]);
+  }, []);
 
   return (
-    <div className="alert alert-primary">
-      <div class="container text-center">
+    <div>
+      {budget.name}
+      <div className="alert alert-primary">
+        <div class="col">
+          Income
+          {budget.cashflows.map((cash) => {
+            return <CashflowItem key={cash.id} cash={cash} />;
+          })}
+        </div>
+        <div>Expenses</div>
+        <div class="col">
+          {budget.expenses.map((expense) => {
+            return <ExpenseItem key={expense.id} expense={expense} />;
+          })}
+        </div>
+        <Remaining budget={budget} />
+      </div>
+      <div class="row">
+        <div>
+          <CreateExpenseForm addExpense={addExpense} budget={budgets} />
+        </div>
+        <Divider dark />
         <div class="row">
-          <h5>My Budgets</h5>
-
-          {budgets.map((budget) => (
-            <BudgetCard
-              budget={budget}
-              key={`budget-${budget.id}`}
-              user={user}
-            />
-          ))}
-
-          {/* <h4 component="p" variant="subtitle1" align="center" paddingTop>
-              You don't have any budgets right now
-            </h4> */}
+          <CreateCashflowForm addCashflow={addCashflow} user={user} />
         </div>
       </div>
+      <div class="col"></div>
     </div>
   );
 }

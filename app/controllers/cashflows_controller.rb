@@ -11,7 +11,7 @@ class CashflowsController < ApplicationController
 
   def create
     @budget = Budget.find(params[:budget_id])
-    cashflow = @budget.cashflow.create(cashflow_params)
+    cashflow = @budget.cashflows.create(cashflow_params)
     render json: cashflow, status: :created
   end
 
