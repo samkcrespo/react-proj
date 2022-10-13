@@ -4,8 +4,8 @@ bundle install
 rails db:migrate
 rals server
 
-npm install --prefix-client
-npm run serve --prefix-client
+npm install --prefix client
+npm run serve --prefix client
 
 
 Wise Budget Manager is an application built using React, Ruby on Rails, & PostgreSQL
